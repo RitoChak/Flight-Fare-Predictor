@@ -14,28 +14,12 @@ def user_input_features():
        'Vistara Premium economy', 'Jet Airways Business',
        'Multiple carriers Premium economy', 'Trujet'))
         
-        # Date of Journey input
-        today = datetime.now()
-        Date_of_Journey = st.date_input("Select Date of Journey", today)
-        
-        # Check if the selected date is not before today
-        if Date_of_Journey < today.date():
-            st.warning("Please select a date not before today.")
-            st.stop()  # Stop execution if the date is before today
-
-        # Extract day and month
-        Journey_day = Date_of_Journey.day
-        Journey_month = Date_of_Journey.month
-        
         #Source input
         source_options = ['Bangalore', 'Kolkata', 'Delhi', 'Chennai', 'Mumbai']
         Source = st.selectbox("Source", source_options)
+
         
-        #Destination input
-        destination_options = [city for city in source_options if city != Source]
-        Destination = st.selectbox("Destination", destination_options)
         
-    with col2:
         # Departure time input
         Dep_Time = st.time_input("Select Departure Time")
             
@@ -44,24 +28,79 @@ def user_input_features():
         # Extract minute from Dep_Time
         Dep_Minutes = Dep_Time.minute
         
+        #Total Stops input
+        Total_Stops = st.selectbox('Total_Stops',('non-stop', '1 stop','2 stops', '3 stops', '4 stops'))
+        
+    with col2:
+        # Date of Journey input
+        today = datetime.now()
+        Date_of_Journey = st.date_input("Select Date of Journey", today)
+        
+        # Extract day and month
+        Journey_day = Date_of_Journey.day
+        Journey_month = Date_of_Journey.month
+        
+        # Check if the selected date is not before today
+        if Date_of_Journey < today.date():
+            st.warning("Please select a date not before today.")
+            st.stop()  # Stop execution if the date is before today
+        
+        #Destination input
+        source_options = ['Bangalore', 'Kolkata', 'Delhi', 'Chennai', 'Mumbai']
+        destination_options = [city for city in source_options if city != Source]
+        Destination = st.selectbox("Destination", destination_options)
+        
         # Arrival time input
         Arrival_Time = st.time_input("Select Arrival Time")
         
         # Check if the selected arrival time is later than departure time
-        if Arrival_Time <= Dep_Time:
-            st.warning("Arrival time should be later than Departure time.")
-            st.stop()  # Stop execution if arrival time is not later than departure time
-            
-        # Extract hour from Arrival_Time
-        Arrival_Hour = Arrival_Time.hour
-        # Extract minute from Dep_Time
-        Arrival_Minutes = Arrival_Time.minute
-        
+        # Check if the selected arrival time is earlier than or equal to departure time
+    
+    # Extract hour from Arrival_Time
+    Arrival_Hour = Arrival_Time.hour
+    # Extract minute from Dep_Time
+    Arrival_Minutes = Arrival_Time.minute
+
+    # Check if arrival time is on the next day and adjust if necessary
+    if Arrival_Time > Dep_Time:
         Duration_Hours = Arrival_Hour - Dep_Hour
         Duration_Minutes = Arrival_Minutes - Dep_Minutes
+    else:
+        # Arrival time is on the next day, add 24 hours to the duration
+        Duration_Hours = 23 + Arrival_Hour - Dep_Hour
+        Duration_Minutes = 60 + Arrival_Minutes - Dep_Minutes
         
-        #Total Stops input
-        Total_Stops = st.selectbox('Total_Stops',('non-stop', '1 stop','2 stops', '3 stops', '4 stops'))
+    # Additional conditions to check and adjust Duration_Hours and Duration_Minutes
+    if Source == 'Bangalore' and Destination == 'Delhi' and Duration_Hours < 2 or (Duration_Hours == 2 and Duration_Minutes < 30):
+        st.warning("The minimum duration needs to be 2 hr 30 minutes.")
+        st.stop()  # Stop execution and show the warning message
+    elif (Source == 'Bangalore' or Source == 'Kolkata') and (Destination == 'Kolkata' or Destination == 'Bangalore') and Duration_Hours < 2 or (Duration_Hours == 2 and Duration_Minutes < 20):
+        st.warning("The minimum duration needs to be 2 hr 20 minutes.")
+        st.stop()  # Stop execution and show the warning message
+    elif (Source == 'Bangalore' or Source == 'Chennai') and (Destination == 'Chennai' or Destination == 'Bangalore') and (Duration_Hours< 1 and Duration_Minutes < 59):
+        st.warning("The minimum duration needs to be 59 minutes.")
+        st.stop()  # Stop execution and show the warning message
+    elif (Source == 'Bangalore' or Source == 'Mumbai') and (Destination == 'Mumbai' or Destination == 'Bangalore') and Duration_Hours < 1 or (Duration_Hours == 1 and Duration_Minutes < 50):
+        st.warning("The minimum duration needs to be 1 hr 50 minutes.")
+        st.stop()  # Stop execution and show the warning message
+    elif (Source == 'Kolkata' or Source == 'Delhi') and (Destination == 'Delhi' or Destination == 'Kolkata') and Duration_Hours < 2 or (Duration_Hours == 2 and Duration_Minutes < 25):
+        st.warning("The minimum duration needs to be 2 hr 25 minutes.")
+        st.stop()  # Stop execution and show the warning message
+    elif (Source == 'Kolkata' and Destination == 'Chennai') and (Destination == 'Chennai' or Destination == 'Kolkata') and Duration_Hours < 2 or (Duration_Hours == 2 and Duration_Minutes < 25):
+        st.warning("The minimum duration needs to be 2 hr 25 minutes.")
+        st.stop()  # Stop execution and show the warning message
+    elif (Source == 'Kolkata' and Destination == 'Mumbai') and (Destination == 'Mumbai' or Destination == 'Kolkata') and Duration_Hours < 2 or (Duration_Hours == 2 and Duration_Minutes < 35):
+        st.warning("The minimum duration needs to be 2 hr 35 minutes.")
+        st.stop()  # Stop execution and show the warning message
+    elif (Source == 'Chennai' and Destination == 'Mumbai') and (Destination == 'Mumbai' or Destination == 'Chennai') and Duration_Hours < 1 or (Duration_Hours == 1 and Duration_Minutes < 55):
+        st.warning("The minimum duration needs to be 1 hr 55 minutes.")
+        st.stop()  # Stop execution and show the warning message
+    elif (Source == 'Chennai' and Destination == 'Delhi') and (Destination == 'Delhi' or Destination == 'Chennai') and Duration_Hours < 2 or (Duration_Hours == 2 and Duration_Minutes < 50):
+        st.warning("The minimum duration needs to be 2 hr 50 minutes.")
+        st.stop()  # Stop execution and show the warning message
+    elif (Source == 'Delhi' and Destination == 'Mumbai') and (Destination == 'Mumbai' or Destination == 'Delhi') and Duration_Hours < 2 or (Duration_Hours == 2 and Duration_Minutes < 10):
+        st.warning("The minimum duration needs to be 2 hr 10 minutes.")
+        st.stop()  # Stop execution and show the warning message
         
     data = {'Total_Stops': Total_Stops,
             'Journey_day' : Journey_day,
@@ -100,15 +139,17 @@ if st.button('Submit'):
 
     fare_data = fare_data[:1]  # Selects only the first row (the user input data)
     
-    st.title('Predicton')
+    st.subheader('The arrival time is of the next date.')
     
     file = open('flight_model.pkl', 'rb')
     model = pickle.load(file)
     file.close()
     user_prediction = model.predict(fare_data)
+    # Round off the predicted fare to two decimals
+    rounded_prediction = round(user_prediction[0], 2)
 
     # Display the prediction in Streamlit
-    st.subheader('Flight Fare Prediction:')
-    st.write('Predicted Fare: INR {}'.format(user_prediction[0]))
+    
+    st.markdown(f'<p style="font-size:40px;">Predicted Fare: <strong>INR {rounded_prediction}</strong></p>', unsafe_allow_html=True)
     
     
