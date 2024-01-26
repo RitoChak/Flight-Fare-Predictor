@@ -21,7 +21,8 @@ def user_input_features():
         
         
         # Departure time input
-        Dep_Time = st.time_input("Select Departure Time")
+        default_time = datetime.now().replace(hour=0, minute=0)
+        Dep_Time = st.time_input("Select Departure Time", value=default_time)
             
         # Extract hour from Dep_Time
         Dep_Hour = Dep_Time.hour
@@ -51,7 +52,8 @@ def user_input_features():
         Destination = st.selectbox("Destination", destination_options)
         
         # Arrival time input
-        Arrival_Time = st.time_input("Select Arrival Time")
+        default_time = datetime.now().replace(hour=0, minute=0)
+        Arrival_Time = st.time_input("Select Arrival Time", value=default_time)
         
         # Check if the selected arrival time is later than departure time
         # Check if the selected arrival time is earlier than or equal to departure time
