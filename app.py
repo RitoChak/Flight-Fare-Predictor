@@ -71,36 +71,46 @@ def user_input_features():
         Duration_Minutes = 60 + Arrival_Minutes - Dep_Minutes
         
     # Additional conditions to check and adjust Duration_Hours and Duration_Minutes
-    if Source == 'Bangalore' and Destination == 'Delhi' and Duration_Hours < 2 or (Duration_Hours == 2 and Duration_Minutes < 30):
-        st.warning("The minimum duration needs to be 2 hr 30 minutes.")
-        st.stop()  # Stop execution and show the warning message
-    elif (Source == 'Bangalore' or Source == 'Kolkata') and (Destination == 'Kolkata' or Destination == 'Bangalore') and Duration_Hours < 2 or (Duration_Hours == 2 and Duration_Minutes < 20):
-        st.warning("The minimum duration needs to be 2 hr 20 minutes.")
-        st.stop()  # Stop execution and show the warning message
-    elif (Source == 'Bangalore' or Source == 'Chennai') and (Destination == 'Chennai' or Destination == 'Bangalore') and (Duration_Hours< 1 and Duration_Minutes < 59):
-        st.warning("The minimum duration needs to be 59 minutes.")
-        st.stop()  # Stop execution and show the warning message
-    elif (Source == 'Bangalore' or Source == 'Mumbai') and (Destination == 'Mumbai' or Destination == 'Bangalore') and Duration_Hours < 1 or (Duration_Hours == 1 and Duration_Minutes < 50):
-        st.warning("The minimum duration needs to be 1 hr 50 minutes.")
-        st.stop()  # Stop execution and show the warning message
-    elif (Source == 'Kolkata' or Source == 'Delhi') and (Destination == 'Delhi' or Destination == 'Kolkata') and Duration_Hours < 2 or (Duration_Hours == 2 and Duration_Minutes < 25):
-        st.warning("The minimum duration needs to be 2 hr 25 minutes.")
-        st.stop()  # Stop execution and show the warning message
-    elif (Source == 'Kolkata' and Destination == 'Chennai') and (Destination == 'Chennai' or Destination == 'Kolkata') and Duration_Hours < 2 or (Duration_Hours == 2 and Duration_Minutes < 25):
-        st.warning("The minimum duration needs to be 2 hr 25 minutes.")
-        st.stop()  # Stop execution and show the warning message
-    elif (Source == 'Kolkata' and Destination == 'Mumbai') and (Destination == 'Mumbai' or Destination == 'Kolkata') and Duration_Hours < 2 or (Duration_Hours == 2 and Duration_Minutes < 35):
-        st.warning("The minimum duration needs to be 2 hr 35 minutes.")
-        st.stop()  # Stop execution and show the warning message
-    elif (Source == 'Chennai' and Destination == 'Mumbai') and (Destination == 'Mumbai' or Destination == 'Chennai') and Duration_Hours < 1 or (Duration_Hours == 1 and Duration_Minutes < 55):
-        st.warning("The minimum duration needs to be 1 hr 55 minutes.")
-        st.stop()  # Stop execution and show the warning message
-    elif (Source == 'Chennai' and Destination == 'Delhi') and (Destination == 'Delhi' or Destination == 'Chennai') and Duration_Hours < 2 or (Duration_Hours == 2 and Duration_Minutes < 50):
-        st.warning("The minimum duration needs to be 2 hr 50 minutes.")
-        st.stop()  # Stop execution and show the warning message
-    elif (Source == 'Delhi' and Destination == 'Mumbai') and (Destination == 'Mumbai' or Destination == 'Delhi') and Duration_Hours < 2 or (Duration_Hours == 2 and Duration_Minutes < 10):
-        st.warning("The minimum duration needs to be 2 hr 10 minutes.")
-        st.stop()  # Stop execution and show the warning message
+    if(Source == 'Bangalore' or Source == 'Delhi') and (Destination == 'Delhi' or Destination == 'Bangalore'):
+        if Duration_Hours < 2 or (Duration_Hours == 2 and Duration_Minutes < 30):
+            st.warning("The minimum duration needs to be 2 hr 30 minutes.")
+            st.stop()  # Stop execution and show the warning message
+    elif (Source == 'Bangalore' or Source == 'Kolkata') and (Destination == 'Kolkata' or Destination == 'Bangalore'):
+        if Duration_Hours < 2 or (Duration_Hours == 2 and Duration_Minutes < 20):
+            st.warning("The minimum duration needs to be 2 hr 20 minutes.")
+            st.stop()  # Stop execution and show the warning message
+    elif (Source == 'Bangalore' or Source == 'Chennai') and (Destination == 'Chennai' or Destination == 'Bangalore'):
+        if (Duration_Hours< 1 and Duration_Minutes < 59):
+            st.warning("The minimum duration needs to be 59 minutes.")
+            st.stop()  # Stop execution and show the warning message
+    elif (Source == 'Bangalore' or Source == 'Mumbai') and (Destination == 'Mumbai' or Destination == 'Bangalore'):
+        if Duration_Hours < 1 or (Duration_Hours == 1 and Duration_Minutes < 50):
+            st.warning("The minimum duration needs to be 1 hr 50 minutes.")
+            st.stop()  # Stop execution and show the warning message
+    elif (Source == 'Kolkata' or Source == 'Delhi') and (Destination == 'Delhi' or Destination == 'Kolkata'):
+        if Duration_Hours < 2 or (Duration_Hours == 2 and Duration_Minutes < 25):
+            st.warning("The minimum duration needs to be 2 hr 25 minutes.")
+            st.stop()  # Stop execution and show the warning message
+    elif (Source == 'Kolkata' or Source == 'Chennai') and (Destination == 'Chennai' or Destination == 'Kolkata'):
+        if Duration_Hours < 2 or (Duration_Hours == 2 and Duration_Minutes < 25):
+            st.warning("The minimum duration needs to be 2 hr 25 minutes.")
+            st.stop()  # Stop execution and show the warning message
+    elif (Source == 'Kolkata' or Source == 'Mumbai') and (Destination == 'Mumbai' or Destination == 'Kolkata'):
+        if Duration_Hours < 2 or (Duration_Hours == 2 and Duration_Minutes < 35):
+            st.warning("The minimum duration needs to be 2 hr 35 minutes.")
+            st.stop()  # Stop execution and show the warning message
+    elif (Source == 'Chennai' or Source == 'Mumbai') and (Destination == 'Mumbai' or Destination == 'Chennai'):
+        if Duration_Hours < 1 or (Duration_Hours == 1 and Duration_Minutes < 55):
+            st.warning("The minimum duration needs to be 1 hr 55 minutes.")
+            st.stop()  # Stop execution and show the warning message
+    elif (Source == 'Chennai' or Source == 'Delhi') and (Destination == 'Delhi' or Destination == 'Chennai'):
+        if Duration_Hours < 2 or (Duration_Hours == 2 and Duration_Minutes < 50):
+            st.warning("The minimum duration needs to be 2 hr 50 minutes.")
+            st.stop()  # Stop execution and show the warning message
+    elif (Source == 'Delhi' or Source == 'Mumbai') and (Destination == 'Mumbai' or Destination == 'Delhi'):
+        if Duration_Hours < 2 or (Duration_Hours == 2 and Duration_Minutes < 10):
+            st.warning("The minimum duration needs to be 2 hr 10 minutes.")
+            st.stop()  # Stop execution and show the warning message
         
     data = {'Total_Stops': Total_Stops,
             'Journey_day' : Journey_day,
@@ -122,7 +132,7 @@ def user_input_features():
 
 input_df = user_input_features()
 
-if st.button('Submit'):
+if st.button('Predict'):
     fare_data = pd.read_csv('train_data_processed.csv')
     fare_data = fare_data.drop(['Price'], axis=1)
     fare_data = pd.concat([input_df, fare_data], axis=0)
