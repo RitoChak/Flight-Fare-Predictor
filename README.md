@@ -1,5 +1,7 @@
 # Flight Fare Prediction Model
 
+## To check the flight fare prediction website : [Click here](https://flight-fare-predictor.streamlit.app/)
+
 This project involves the development of a machine learning model for predicting flight fares based on various input parameters. The model has been trained on historical flight data and utilizes a Random Forest Regressor algorithm for making predictions.
 
 ## Overview
@@ -25,5 +27,8 @@ This project involves the development of a machine learning model for predicting
 
 - Python
 - Libraries: NumPy, Pandas, Matplotlib, Seaborn, Scikit-learn, Streamlit
+
+## Exploratory Data Analysis and Model Building
+For a detailed analysis and model building process, you can refer to the [Jupyter Notebook.](Flight_Fare_Predictor.ipynb)
 
 Feel free to contribute to the project or provide feedback!
