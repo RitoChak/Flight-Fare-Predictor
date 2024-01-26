@@ -37,8 +37,7 @@ def user_input_features():
         
     with col2:
         # Departure time input
-        current_time = datetime.now().time()
-        Dep_Time = st.time_input("Select Departure Time", current_time)
+        Dep_Time = st.time_input("Select Departure Time")
             
         # Extract hour from Dep_Time
         Dep_Hour = Dep_Time.hour
